@@ -1,6 +1,6 @@
 export class Register {
-  course: string;
-  startDate: string;
-  endDate: string;
-  jacsCode: string;
+  course: string | undefined;
+  startDate: string | undefined;
+  endDate: string | undefined;
+  jacsCode: string | undefined;
 }

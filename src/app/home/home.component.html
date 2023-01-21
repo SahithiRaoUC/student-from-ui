@@ -55,6 +55,15 @@
               Value does not match with pdf course JACS code value
             </span>
           </div>
+          <div class="form-group">
+            <label for="filecontrol">Certificate : </label>
+            <input type="file"
+                   name="file"
+                   forControlName="file"
+                   class="form-control"
+                   enctype="multipart/form-data" accept=".pdf,application/pdf" (change)="onFileChange($event)"/>
+            <span class="text-danger" *ngIf="(fileSource?.touched || submitted) && fileSource?.errors?.required"> File is required </span>
+          </div>
           <div class="text-center">
             <input type="submit" class="btn btn-my" value="Submit">
             <input type="reset" class="btn btn-my btn-space" value="Clear Form" (click)="clearForm()">
