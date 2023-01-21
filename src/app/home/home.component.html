@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
+    <div class="card auth">
+      <div class="card-body auth-card">
+        <div class="auth-avatar">
+          <img
+            src="https://pluspng.com/img-png/user-png-icon-account-avatar-human-male-man-men-people-person-download-svg-download-png-edit-icon-512.png"
+            alt="user" class="user-image">
+        </div>
+        <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="course">Course Department : </label>
+            <input type="text" name="course" class="form-control" placeholder="Course Department"
+                   formControlName="course"
+                   [ngClass]="{'validation-error' : (course?.touched || submitted) && course?.invalid }">
+            <span class="text-danger" *ngIf="(course?.touched || submitted) && course?.errors?.required"> Course is required
+            </span>
+            <span class="text-danger" *ngIf="(course?.touched || submitted) && course?.errors?.minlength"> Course should  be at leat 4 chars
+            </span>
+            <span class="text-danger" *ngIf="(course?.touched || submitted) && course?.errors?.valueNotMatch"> Value does not match with pdf course value
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="phone">Start Date : </label>
+            <input type="date" name="startDate" class="form-control" formControlName="startDate"
+                   [ngClass]="{'validation-error' : (startDate?.touched || submitted) && startDate?.invalid}">
+            <span class=" text-danger" *ngIf="(startDate?.touched || submitted) && startDate?.errors?.required"> Start
+            Date is required
+            </span>
+            <span class="text-danger" *ngIf="(startDate?.touched || submitted) && startDate?.errors?.valueNotMatch">
+              Value does not match with pdf course start date value
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="email">End Date : </label>
+            <input type="date" name="endtDate" class="form-control" formControlName="endDate"
+                   [ngClass]="{'validation-error' : (endDate?.touched || submitted) && endDate?.invalid }">
+            <span class=" text-danger" *ngIf="(endDate?.touched || submitted) && endDate?.errors?.required"> End Date is
+            required
+            </span>
+            <span class="text-danger" *ngIf="(endDate?.touched || submitted) && endDate?.errors?.endDateLimit"> End Date Should be after Start Date
+            </span>
+            <span class="text-danger" *ngIf="(endDate?.touched || submitted) && endDate?.errors?.valueNotMatch"> Value does not match with pdf course end date value
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="jacsCode">JACS Code : </label>
+            <input type="text" name="jacsCode" class="form-control" placeholder="jacsCode"
+                   formControlName="jacsCode"
+                   [ngClass]="{'validation-error' : (jacsCode?.touched || submitted) && jacsCode?.invalid}">
+            <span class=" text-danger" *ngIf="(jacsCode?.touched || submitted) && jacsCode?.errors?.required"> JACS Code
+            is required
+            </span>
+            <span class="text-danger" *ngIf="(jacsCode?.touched || submitted) && jacsCode?.errors?.valueNotMatch">
+              Value does not match with pdf course JACS code value
+            </span>
+          </div>
+          <div class="text-center">
+            <input type="submit" class="btn btn-my" value="Submit">
+            <input type="reset" class="btn btn-my btn-space" value="Clear Form" (click)="clearForm()">
+          </div>
+        </form>
+        <div class="text-center response-message">
+          <label *ngIf="successSubmission">Thank You !!!</label>
+          <label *ngIf="errorSubmission" style="color: red">Error</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
