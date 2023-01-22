@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import * as moment from "moment";
-import {PdfService} from "../service/pdf.service";
 import {Register} from "../model/register";
 import * as PDFJS from "pdfjs-dist";
 import {TextItem} from "pdfjs-dist/types/src/display/api";
@@ -23,7 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   successSubmission = false;
   errorSubmission = false;
 
-  constructor(private fb: FormBuilder, private pdfSaveService: PdfService) {
+  constructor(private fb: FormBuilder) {
   }
 
   ngOnDestroy(): void {
@@ -75,13 +74,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.submitted = true;
     if (this.registerForm?.valid && this.pdfRegForm) {
 
+      console.log(this.pdfRegForm, this.registerForm)
+
       this.course?.setErrors(this.pdfRegForm.course === this.course?.value ? null : {valueNotMatch: true});
-      this.startDate?.setErrors(this.pdfRegForm.startDate === moment(this.startDate?.value).format("D/M/YYYY") ? null : {valueNotMatch: true});
-      this.endDate?.setErrors(this.pdfRegForm.endDate === moment(this.endDate?.value).format("D/M/YYYY") ? null : {valueNotMatch: true});
+      this.startDate?.setErrors(this.pdfRegForm.startDate === moment(this.startDate?.value).format("DD MMM YYYY") ? null : {valueNotMatch: true});
+      this.endDate?.setErrors(this.pdfRegForm.endDate === moment(this.endDate?.value).format("DD MMM YYYY") ? null : {valueNotMatch: true});
       this.jacsCode?.setErrors(this.pdfRegForm.jacsCode === this.jacsCode?.value ? null : {valueNotMatch: true});
 
       this.registerForm.updateValueAndValidity();
-      console.log("Received Response registerForm", this.registerForm);
 
       this.successSubmission = this.registerForm.valid;
       this.errorSubmission = this.registerForm.invalid;
